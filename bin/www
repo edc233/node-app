@@ -6,13 +6,14 @@
 
 var app = require('../app');
 var debug = require('debug')('node-serve:server');
+var mongoose = require('mongoose')
 var http = require('http');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '3005');
 app.set('port', port);
 
 /**
@@ -20,11 +21,14 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-
 /**
  * Listen on provided port, on all network interfaces.
  */
 
+mongoose.connect('mongodb://localhost:27017/ant-app',{ useNewUrlParser: true,useUnifiedTopology: true })
+.then(() => {
+  console.log('数据库连接成功')
+}).catch(err => {console.log(err)})
 server.listen(port);
 console.log('success')
 server.on('error', onError);
