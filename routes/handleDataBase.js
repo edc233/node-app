@@ -18,6 +18,9 @@ router.post('/login', function(req, res, next) {
                 gender:data.gender,
                 joinDate:data.joinDate
             }
+        }else if(!data){
+            result.code=400
+            result.msg.err='账号不存在，请联系管理员'
         }else{
             result.code=400
             result.msg.err="账号或密码错误，请重新输入！"
